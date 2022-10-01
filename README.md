@@ -35,6 +35,6 @@
 3. Реализовать подключение к серверу
 
 ### 4. Ссылка проекта на GitHub
-[MESTO](-)
+[MESTO](https://sergey-pyschkin.github.io/mesto/)
 # mesto
 # mesto
