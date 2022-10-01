@@ -1,4 +1,4 @@
-.popup__input{
+.popup__input {
   font-family: inherit;
   box-sizing: border-box;
   width: 100%;
@@ -16,28 +16,35 @@
   outline: 0;
 }
 
-.popup__input::-webkit-input-placeholder{
+.popup__input:focus {
+  color: red;
+}
+
+.popup__input::-webkit-input-placeholder {
   font-family: inherit;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
 }
-.popup__input::-moz-placeholder{
+
+.popup__input::-moz-placeholder {
   font-family: inherit;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
 }
-.popup__input::-ms-input-placeholder{
+
+.popup__input::-ms-input-placeholder {
   font-family: inherit;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
 }
-.popup__input::placeholder{
+
+.popup__input::placeholder {
   font-family: inherit;
   font-style: normal;
   font-weight: 400;
