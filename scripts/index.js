@@ -9,7 +9,7 @@ const jobProfile = document.querySelector(".profile__subtitle");
 const namePopup = document.querySelector("#editName");
 const jobPopup = document.querySelector("#editJob");
 const formEdit = document.querySelector("#edit-form");
-const addForm = document.querySelector("#add-form");
+const formAdd = document.querySelector("#add-form");
 const namePlace = document.querySelector("#addName");
 const placeImg = document.querySelector("#addLink");
 const caseElement = document.querySelector(".places");
@@ -18,6 +18,32 @@ const popupOpenImage = document.querySelector(".popup_image");
 const popupOpenImageCloseButton = document.getElementById("image-close-button");
 const popupImage = popupOpenImage.querySelector(".popup__place");
 const popupName = popupOpenImage.querySelector(".popup__title-image");
+const popups = document.querySelectorAll(".popup");
+
+function keyHandler(evt) {
+  if (evt.key === "Escape") {
+    const openedPopup = document.querySelector(".popup_opened");
+    closePopup(openedPopup);
+  }
+}
+
+function clickClose(event) {
+  if (event.target.classList.contains("popup")) {
+    const openedPopup = document.querySelector(".popup_opened");
+    closePopup(openedPopup);
+  }
+}
+
+const config = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__submit",
+  inactiveButtonClass: "popup__submit_disabled",
+  inputErrorClass: "popup__error",
+  errorClass: "popup__input_type_error",
+};
+
+enableValidation(config);
 
 const initialCards = [
   {
@@ -94,16 +120,18 @@ const cardsFormHandler = (event) => {
     name: namePlace.value,
     link: placeImg.value,
   });
-  addForm.reset();
+  formAdd.reset();
   closePopup(popupAdd);
 };
 
 function openPopup(popup) {
   popup.classList.add("popup_opened");
+  document.addEventListener("keydown", keyHandler);
 }
 
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
+  document.removeEventListener("keydown", keyHandler);
 }
 
 function submitProfileForm(event) {
@@ -118,14 +146,23 @@ formEdit.addEventListener("submit", submitProfileForm);
 popupProfileOpenButton.addEventListener("click", () => {
   namePopup.value = nameProfile.textContent;
   jobPopup.value = jobProfile.textContent;
+  setSubmitButtonState(formEdit, config);
+  resetError(formEdit, config);
   openPopup(popupEdit);
 });
 popupProfileCloseButton.addEventListener("click", () => closePopup(popupEdit));
 
-popupAddOpenButton.addEventListener("click", () => openPopup(popupAdd));
+popupAddOpenButton.addEventListener("click", () => {
+  namePlace.value = "";
+  placeImg.value = "";
+  setSubmitButtonState(formAdd, config);
+  resetError(formAdd, config);
+  openPopup(popupAdd);
+});
+
 popupAddCloseButton.addEventListener("click", () => closePopup(popupAdd));
 
-addForm.addEventListener("submit", cardsFormHandler);
+formAdd.addEventListener("submit", cardsFormHandler);
 
 popupOpenImageCloseButton.addEventListener("click", () =>
   closePopup(popupOpenImage)
@@ -136,3 +173,5 @@ window.addEventListener("load", () => {
     .querySelectorAll(".popup")
     .forEach((popup) => popup.classList.add("popup_transition"));
 });
+
+popups.forEach((popup) => popup.addEventListener("click", clickClose));

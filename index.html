@@ -15,7 +15,7 @@
         src="./images/header-logo.svg"
         alt="Россия лого"
         class="header__logo"
-    >
+      >
     </header>
     <main class="content">
       <section class="profile">
@@ -35,9 +35,7 @@
           aria-label="Создание карточки"
         ></button>
       </section>
-
       <section class="places"></section>
-
       <div class="popup popup_image">
         <div class="popup__container-image">
           <button
@@ -50,8 +48,8 @@
           <h2 class="popup__title-image"></h2>
         </div>
       </div>
-
       <div class="popup popup_edit">
+        <a class="popup__overlay"></a>
         <div class="popup__container">
           <button
             type="button"
@@ -60,7 +58,12 @@
             id="edit__close-button"
           ></button>
           <h2 class="popup__title">Редактировать профиль</h2>
-          <form class="popup__form" name="profile-form" id="edit-form">
+          <form
+            class="popup__form"
+            name="profile-form"
+            id="edit-form"
+            novalidate
+          >
             <input
               type="text"
               name="name"
@@ -68,7 +71,10 @@
               id="editName"
               placeholder="Имя"
               required
-          >
+              minlength="2"
+              maxlength="40"
+            >
+            <span id="editName-error" class="popup__error"></span>
             <input
               type="text"
               name="EditJob"
@@ -76,7 +82,10 @@
               id="editJob"
               placeholder="Род деятельности"
               required
-          >
+              minlength="2"
+              maxlength="200"
+            >
+            <span id="editJob-error" class="popup__error"></span>
             <button type="submit" class="popup__submit" aria-label="Сохранить">
               Сохранить
             </button>
@@ -84,6 +93,7 @@
         </div>
       </div>
       <div class="popup popup_add">
+        <a class="popup__overlay"></a>
         <div class="popup__container">
           <button
             type="button"
@@ -92,21 +102,27 @@
             aria-label="Закрыть попап"
           ></button>
           <h2 class="popup__title">Новое место</h2>
-          <form class="popup__form" name="add-form" id="add-form">
+          <form class="popup__form" name="add-form" id="add-form" novalidate>
             <input
               type="text"
               name="AddName"
               class="popup__input"
               id="addName"
               placeholder="Название"
-          >
+              minlength="2"
+              maxlength="30"
+              required
+            >
+            <span id="addName-error" class="popup__error"></span>
             <input
-              type="text"
+              type="url"
               name="AddLink"
               class="popup__input"
               id="addLink"
               placeholder="Ссылка на картинку"
-          >
+              required
+            >
+            <span id="addLink-error" class="popup__error"></span>
             <button type="submit" class="popup__submit" aria-label="Сохранить">
               Сохранить
             </button>
@@ -127,6 +143,7 @@
         </div>
       </article>
     </template>
+    <script src="./scripts/validate.js"></script>
     <script src="./scripts/index.js"></script>
   </body>
 </html>
